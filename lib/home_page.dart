@@ -1,27 +1,24 @@
 import 'package:flutter/material.dart';
-import "page7.dart";
+import "account_page.dart";
 import "python_test.dart";
 import 'package:camera/camera.dart';
 
 
-class Page6 extends StatefulWidget {
-  const Page6({super.key, required this.title, required this.value, required this.camera});
-  final String title;
-  final String value;
-  final CameraDescription camera;
+class HomePage extends StatefulWidget {
+
 
   @override
-  State<Page6> createState() => _Page6State();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _Page6State extends State<Page6> {
+class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: Text(widget.title),
+          title: const Text("Home"),
         ),
         body: Container(
             alignment: Alignment.bottomCenter,
@@ -52,8 +49,8 @@ class _Page6State extends State<Page6> {
                           onPressed: () {
                             Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => Page6(title: "Home Page", value: widget.value, camera: widget.camera))
-                            );
+                                MaterialPageRoute(builder: (context) => HomePage()
+                            ));
                           },
                         ),
                       ),
@@ -62,11 +59,11 @@ class _Page6State extends State<Page6> {
                         child: ElevatedButton(
                           child: const Text("Discover"),
                           onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) =>
-                                    python_test(title: "Discover", value: widget.value, camera: widget.camera))
-                            );
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(builder: (context) =>
+                            //         python_test()
+                            // );
                           },
                         ),
                       ),
@@ -78,7 +75,7 @@ class _Page6State extends State<Page6> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) =>
-                                    Page7(title: "Account Page", value: widget.value, camera: widget.camera))
+                                    AccountPage())
                             );
                           },
                         ),

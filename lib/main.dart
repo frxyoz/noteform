@@ -1,12 +1,14 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:camera/camera.dart';
-import "page5.dart";
+import "login_page.dart";
 import "python_test.dart";
 import "user_simple_preferences.dart";
 
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   final cameras = await availableCameras();
   final firstCamera = cameras.first;
   await UserSimplePreferences.init();
@@ -60,7 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: (){
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Page5(title:"Login", camera: widget.camera))
+                      MaterialPageRoute(builder: (context) => LoginPage())
                   );
                 }
             ),

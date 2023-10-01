@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "124144935974",
+    "project_id": "piano-tracker-36c4f",
+    "storage_bucket": "piano-tracker-36c4f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:124144935974:android:653a471df256b0c9b9b2e7",
+        "android_client_info": {
+          "package_name": "com.example.piano"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBoGAtzJyqZ3po3ZA6k-QOXBXku3tHQtQY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
