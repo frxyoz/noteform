@@ -6,7 +6,6 @@ import 'package:camera/camera.dart';
 
 
 class LoginPage extends StatefulWidget {
-
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
@@ -26,9 +25,10 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void navigateToHomePage(){
-    Navigator.push(
+    Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (context) => HomePage())
+        MaterialPageRoute(builder: (context) => HomePage()),
+        (route)=> false
     );
   }
 
@@ -95,49 +95,56 @@ class _LoginPageState extends State<LoginPage> {
   Form loginForm(){
     return Form(
       key: _formKey,
-      child: Column(
-        children: [
-          // Email Form Field
-        TextFormField(
-        controller: emailController,
-        validator: validateEmail,
-        decoration: const InputDecoration(
-        border: OutlineInputBorder(),
-        labelText: 'Email',
-        hintText: 'user@example.com'
-        ),
-        ),
-
-          // Password Form Field
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          children: [
+            // Email Form Field
           TextFormField(
-            controller: passwordController,
-            validator: validatePassword,
-            obscureText: true,
-            decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Password',
-                hintText: 'Password'
-            ),
+          controller: emailController,
+          validator: validateEmail,
+          decoration: const InputDecoration(
+          border: OutlineInputBorder(),
+          labelText: 'Email',
+          hintText: 'user@example.com'
+          ),
           ),
 
-          Row(
-            children: [
-              // Login Button
-              ElevatedButton(
-                  onPressed: onPressedLoginButton,
-                  child: const Text('Login')
+            // Password Form Field
+            Padding(
+              padding: const EdgeInsets.only(top:8.0, bottom:8),
+              child: TextFormField(
+                controller: passwordController,
+                validator: validatePassword,
+                obscureText: true,
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Password',
+                    hintText: 'Password'
+                ),
               ),
+            ),
 
-              // Sign Up Button
-              ElevatedButton(
-                  onPressed: navigateToSignUpPage,
-                  child: const Text('SignUp')
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                // Login Button
+                ElevatedButton(
+                    onPressed: onPressedLoginButton,
+                    child: const Text('Login')
+                ),
 
-            ],
-          )
+                // Sign Up Button
+                ElevatedButton(
+                    onPressed: navigateToSignUpPage,
+                    child: const Text('SignUp')
+                ),
 
-        ],
+              ],
+            )
+
+          ],
+        ),
       )
     );
   }

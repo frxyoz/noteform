@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:camera/camera.dart';
+import 'GlobalData.dart';
+import 'home_page.dart';
 import "login_page.dart";
 import "python_test.dart";
 import "user_simple_preferences.dart";
@@ -9,15 +12,14 @@ import "user_simple_preferences.dart";
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  final cameras = await availableCameras();
-  final firstCamera = cameras.first;
+  // final cameras = await availableCameras();
+  // GlobalData.cameras = cameras;
+
   await UserSimplePreferences.init();
-  runApp( MyApp(camera: firstCamera,));
+  runApp( MyApp() );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key, required this.camera});
-  final CameraDescription camera;
 
   // This widget is the root of your application.
   @override
@@ -28,15 +30,14 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white24),
         useMaterial3: true,
       ),
-      home: MyHomePage(title: 'Piano Tracker Home Page', camera: camera),
+      home: MyHomePage(title: 'Piano Tracker Home Page'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title, required this.camera});
+  const MyHomePage({super.key, required this.title});
   final String title;
-  final CameraDescription camera;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -44,6 +45,22 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+
+  void navigateToLoginScreen(){
+    if( FirebaseAuth.instance.currentUser == null){
+      Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => LoginPage())
+      );
+    }
+    else{
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage()),
+        (route) => false
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,13 +75,8 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             const Text("Welcome to Piano Tracker", style: TextStyle(fontSize: 50), textAlign: TextAlign.center,),
             ElevatedButton(
-                child: const Text("Login", style: TextStyle(fontSize: 32),),
-                onPressed: (){
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => LoginPage())
-                  );
-                }
+              child: const Text("Login", style: TextStyle(fontSize: 32),),
+              onPressed: navigateToLoginScreen
             ),
           ],
         ),
