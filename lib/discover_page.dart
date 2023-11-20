@@ -60,8 +60,9 @@ class _State extends State<DiscoverPage>{
     cameras = await availableCameras();
     if(cameras != null){
       cameraController = CameraController(
-          cameras![0],
-          ResolutionPreset.medium
+          cameras![1], // 1 for front facing camera, 0 for rear camera
+          ResolutionPreset.medium,
+          enableAudio: false,
       );
 
       cameraController!.initialize().then(

@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:piano/discover_page.dart';
+import 'package:piano/session_details_page.dart';
 import "account_page.dart";
 import "python_test.dart";
 import 'package:camera/camera.dart';
@@ -27,6 +29,16 @@ class _HomePageState extends State<HomePage> {
         MaterialPageRoute(builder: (context)=> AccountPage() )
     );
   }
+
+
+  void navigateToSessionDetailsPage(Map<dynamic, dynamic> sessionData){
+    SessionData sd = SessionData(data: sessionData);
+    Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context)=> SessionDetailsPage(sessionData: sd) )
+    );
+  }
+
 
   Widget progressChart(){
     return Container(
@@ -107,19 +119,30 @@ class _HomePageState extends State<HomePage> {
     Map<dynamic, dynamic> mapData = snapshotData.value as Map<dynamic, dynamic>;
     List<dynamic> dataKeys =  mapData.keys.toList();
     dataKeys.sort();
+    print(dataKeys);
+
+    final f = DateFormat('MM/dd/yyyy hh:mm a');
+
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListView.builder(
         itemCount: dataKeys.length,
         itemBuilder: (context, index){
+
+          Map<dynamic, dynamic> sessionData = mapData[dataKeys[index]];
+
           int milliseconds = int.parse(dataKeys[index]);
-          String date = DateTime.fromMillisecondsSinceEpoch(milliseconds).toIso8601String();
+          DateTime date = DateTime.fromMillisecondsSinceEpoch(milliseconds);
+          String dateString = f.format(date);
+
           return Card(
             child: ListTile(
               trailing: const Icon(Icons.chevron_right),
-              onTap: (){},
-              title: Text('$date'),
+              onTap: (){
+                navigateToSessionDetailsPage(sessionData);
+              },
+              title: Text(dateString),
             ),
           );
         }

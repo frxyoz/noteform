@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "124144935974",
+    "firebase_url": "https://piano-tracker-36c4f-default-rtdb.firebaseio.com",
     "project_id": "piano-tracker-36c4f",
     "storage_bucket": "piano-tracker-36c4f.appspot.com"
   },
