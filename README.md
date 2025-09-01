@@ -1,6 +1,6 @@
 # NoteForm – Piano Hand Posture Analysis App
 
-**NoteForm** is a Flutter-based iOS application that provides **real-time feedback on piano hand posture** using machine learning. The app tracks user progress over time, helping pianists improve accuracy and technique through **data-driven insights**.
+**NoteForm** is a Flutter-based mobile application that provides **real-time feedback on piano hand posture** using machine learning. The app tracks user progress over time, helping pianists improve accuracy and technique through **data-driven insights**.
 
 ---
 
@@ -26,6 +26,7 @@
 - Serves as the **central hub** for capturing, processing, and displaying data.
 - Sends camera snapshots to the **Flask server** for pose estimation, then receives processed feedback for display.
 - Manages session data locally and synchronizes it with Firebase for **long-term storage**.
+- Built in Android Studio.
 
 ### 2. Firebase Database
 - Handles **user authentication** and secure storage of emails and passwords.
